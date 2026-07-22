@@ -101,7 +101,8 @@ class BlockManager:
         seq.block_table.clear()
 
     def can_append(self, seq: Sequence) -> bool:
-        return len(self.free_block_ids) >= (len(seq) % self.block_size == 1)
+        # 因为如果需要append一定是从多了一个开始的，所以只需要余 1 就够了
+        return len(self.free_block_ids) >= (len(seq) % self.block_size == 1) 
 
     def may_append(self, seq: Sequence):
         if len(seq) % self.block_size == 1:

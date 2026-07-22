@@ -12,16 +12,18 @@ readme = "README.md"
 description = "a lightweight vLLM implementation built from scratch"
 requires-python = ">=3.10,<3.13"
 dependencies = [
-    "torch>=2.4.0",
-    "triton>=3.0.0",
-    "transformers>=4.51.0",
-    "flash-attn",
+    "torch==2.5.1",
+    "triton==3.1.0",
+    "transformers>=4.51.0,<5.0.0",
     "xxhash",
 ]
 
-[project.urls]
-Homepage="https://github.com/GeeeekExplorer/nano-vllm"
+[tool.uv]
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["nanovllm*"]
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
+
+[tool.uv.extra-build-dependencies]
+flash-attn = ["torch"]
